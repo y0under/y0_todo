@@ -2,9 +2,9 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
-
-#include <QTableView>
+#include <QPushButton>
 #include <QStandardItemModel>
+#include <QTableView>
 
 #include "widgets/infinitetablemodel.h"
 
@@ -28,6 +28,9 @@ private:
     QTableView *table_view;
     // QStandardItemModel *model;
     widgets::InfiniteTableModel *model;
+    QPushButton *add_btn;
+    QPushButton *to_today_btn;
+
     void SetupModel();
 };
 #endif // MAINWINDOW_H

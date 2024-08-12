@@ -21,6 +21,9 @@ int InfiniteTableModel::columnCount(const QModelIndex &parent ) const
 
 QVariant InfiniteTableModel::data(const QModelIndex &index, int role) const
 {
+    // TODO: set data
+    return QVariant();
+
     if (!index.isValid()) {
         return QVariant();
     }

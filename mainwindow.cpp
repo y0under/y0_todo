@@ -6,15 +6,19 @@
 #include <QTime>
 
 MainWindow::MainWindow(QWidget *parent)
-    : QMainWindow(parent), table_view(new QTableView(this)), model(new widgets::InfiniteTableModel(this))
+    : QMainWindow(parent), table_view(new QTableView(this)), model(new widgets::InfiniteTableModel(this)),
+      add_btn(new QPushButton("追加", this)), to_today_btn(new QPushButton("今日", this))
 {
     // モデルの設定
     SetupModel();
+
+    // add_btn->setGeometry(50, this->y() + this->height() + 5, add_btn->width(), add_btn->height());
 
     // QTableView の設定
     table_view->setModel(model);
     table_view->setHorizontalScrollMode(QAbstractItemView::ScrollPerPixel);
     table_view->setVerticalScrollMode(QAbstractItemView::ScrollPerPixel);
+    // table_view->setFixedHeight(500);
 
     // QMainWindow のサイズ設定
     resize(800, 600); // 初期サイズの設定
@@ -22,12 +26,29 @@ MainWindow::MainWindow(QWidget *parent)
     setMaximumSize(1200, 800); // 最大サイズの設定
 
     // セントラルウィジェットを作成し、レイアウトを設定
-    QWidget *centralWidget = new QWidget(this);
-    QVBoxLayout *layout = new QVBoxLayout(centralWidget);
-    layout->addWidget(table_view);
+    QWidget *central_widget = new QWidget(this);
+    QGridLayout *layout = new QGridLayout(central_widget);
+    layout->addWidget(table_view, 0, 0, 1, 2);
 
-    centralWidget->setLayout(layout);
-    setCentralWidget(centralWidget);
+    // ボタンのサイズを設定
+    add_btn->setFixedWidth(100); // 固定幅設定
+    to_today_btn->setFixedWidth(100); // 固定幅設定
+
+    // ボタンのレイアウト設定
+    QHBoxLayout *button_layout = new QHBoxLayout();
+    button_layout->addWidget(add_btn);
+    button_layout->addWidget(to_today_btn);
+    // button_layout->setAlignment(Qt::AlignLeft);
+
+    // 左側のスペースを追加
+    QSpacerItem *spacer = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
+    button_layout->addSpacerItem(spacer);
+
+    // ボタンのレイアウトを追加
+    layout->addLayout(button_layout, 1, 0, 1, 2);
+
+    central_widget->setLayout(layout);
+    setCentralWidget(central_widget);
 
     // 初期スクロール位置を設定
     QModelIndex today_index = model->index(0, model->getTodayColumnIndex());
