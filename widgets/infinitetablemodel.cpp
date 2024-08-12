@@ -4,7 +4,8 @@ namespace widgets {
 InfiniteTableModel::InfiniteTableModel(QObject *parent)
     : QAbstractTableModel(parent),
       row_count_value(24),
-      column_count_value(0) {}
+      column_count_value(0),
+      today_date(QDate::currentDate()) {}
 
 int InfiniteTableModel::rowCount(const QModelIndex &parent) const
 {
@@ -39,7 +40,8 @@ QVariant InfiniteTableModel::headerData(int section, Qt::Orientation orientation
 
     if (orientation == Qt::Horizontal) {
         // 横のヘッダー（例: 日付）
-        return QString("Date %1").arg(section);
+        QDate date = today_date.addDays(section - today_column_index);
+        return date.toString("yyyy-MM-dd");
     } else {
         // 縦のヘッダー（例: 時刻）
         return time_headers.at(section);
@@ -62,5 +64,16 @@ void InfiniteTableModel::setTimeHeaders(const QStringList &headers)
 {
     time_headers = headers;
     emit layoutChanged();
+}
+
+void InfiniteTableModel::setTodayColumnIndex(int index)
+{
+    today_column_index = index;
+    emit layoutChanged();
+}
+
+int InfiniteTableModel::getTodayColumnIndex() const
+{
+    return today_column_index;
 }
 }  // namespace widhets

@@ -28,6 +28,10 @@ MainWindow::MainWindow(QWidget *parent)
 
     centralWidget->setLayout(layout);
     setCentralWidget(centralWidget);
+
+    // 初期スクロール位置を設定
+    QModelIndex today_index = model->index(0, model->getTodayColumnIndex());
+    table_view->scrollTo(today_index, QAbstractItemView::PositionAtCenter);
 }
 
 MainWindow::~MainWindow()
@@ -37,24 +41,30 @@ MainWindow::~MainWindow()
 void MainWindow::SetupModel()
 {
     // 日付と時刻のサンプルデータ
-    QStringList dateHeaders;
-    QStringList timeHeaders;
+    QStringList date_headers;
+    QStringList time_headers;
 
     // 日付の設定（例: 一週間分）
     QDate startDate = QDate::currentDate();
-    for (int i = 0; i < 7; ++i) {
-        dateHeaders << startDate.addDays(i).toString("yyyy-MM-dd");
+    for (int i = -7; i < 7; ++i) {
+        date_headers << startDate.addDays(i).toString("yyyy-MM-dd");
     }
 
     // 時刻の設定（例: 一日の時間帯）
     for (int hour = 0; hour < 24; ++hour) {
-        timeHeaders << QString::asprintf("%02d:00", hour);
+        time_headers << QString::asprintf("%02d:00", hour);
     }
 
     // モデルのヘッダー設定
-    model->setColumnCount(dateHeaders.size());
-    model->setTimeHeaders(timeHeaders);
+    model->setColumnCount(date_headers.size());
+    model->setTimeHeaders(time_headers);
     // model->setRowCount(timeHeaders.size());
+
+    model->setRowCount(time_headers.size());
+    model->setColumnCount(date_headers.size());
+    model->setTimeHeaders(time_headers);
+    model->setTodayColumnIndex(date_headers.indexOf(QDate::currentDate().toString("yyyy-MM-dd")));
+
 
     // ヘッダーのラベル設定（必要な場合はInfiniteTableModel内で設定されます）
 }
