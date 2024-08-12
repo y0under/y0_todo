@@ -47,14 +47,14 @@ void MainWindow::SetupModel()
     }
 
     // 時刻の設定（例: 一日の時間帯）
-    QList<QTime> times = {QTime(9, 0), QTime(12, 0), QTime(15, 0), QTime(18, 0)};
-    for (const QTime &time : times) {
-        timeHeaders << time.toString("HH:mm");
+    for (int hour = 0; hour < 24; ++hour) {
+        timeHeaders << QString::asprintf("%02d:00", hour);
     }
 
     // モデルのヘッダー設定
     model->setColumnCount(dateHeaders.size());
-    model->setRowCount(timeHeaders.size());
+    model->setTimeHeaders(timeHeaders);
+    // model->setRowCount(timeHeaders.size());
 
     // ヘッダーのラベル設定（必要な場合はInfiniteTableModel内で設定されます）
 }

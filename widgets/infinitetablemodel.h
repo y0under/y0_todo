@@ -23,12 +23,13 @@ public:
     QVariant headerData(int section, Qt::Orientation orientation, int role = Qt::DisplayRole) const override;
 
     void setRowCount(int count);
-
     void setColumnCount(int count);
+    void setTimeHeaders(const QStringList &headers);
 
 private:
     int row_count_value = 1000; // 大きな行数
     int column_count_value = 1000; // 大きな列数
+    QStringList time_headers;
 };
 }  // namespace widgets
 

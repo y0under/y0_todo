@@ -1,7 +1,10 @@
 #include "infinitetablemodel.h"
 
 namespace widgets {
-InfiniteTableModel::InfiniteTableModel(QObject *parent) : QAbstractTableModel(parent) {}
+InfiniteTableModel::InfiniteTableModel(QObject *parent)
+    : QAbstractTableModel(parent),
+      row_count_value(24),
+      column_count_value(0) {}
 
 int InfiniteTableModel::rowCount(const QModelIndex &parent) const
 {
@@ -39,7 +42,7 @@ QVariant InfiniteTableModel::headerData(int section, Qt::Orientation orientation
         return QString("Date %1").arg(section);
     } else {
         // 縦のヘッダー（例: 時刻）
-        return QString("Time %1").arg(section);
+        return time_headers.at(section);
     }
 }
 
@@ -52,6 +55,12 @@ void InfiniteTableModel::setRowCount(int count)
 void InfiniteTableModel::setColumnCount(int count)
 {
     column_count_value = count;
+    emit layoutChanged();
+}
+
+void InfiniteTableModel::setTimeHeaders(const QStringList &headers)
+{
+    time_headers = headers;
     emit layoutChanged();
 }
 }  // namespace widhets
