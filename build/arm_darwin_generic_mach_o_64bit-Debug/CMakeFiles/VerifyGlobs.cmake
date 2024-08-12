@@ -42,6 +42,8 @@ endif()
 file(GLOB_RECURSE NEW_GLOB LIST_DIRECTORIES false "/Users/y0_/prog/cc/y0_todo/*.cpp")
 set(OLD_GLOB
   "/Users/y0_/prog/cc/y0_todo/build/arm_darwin_generic_mach_o_64bit-Debug/CMakeFiles/3.29.3/CompilerIdCXX/CMakeCXXCompilerId.cpp"
+  "/Users/y0_/prog/cc/y0_todo/build/arm_darwin_generic_mach_o_64bit-Debug/y0_todo_autogen/EWIEGA46WW/moc_mainwindow.cpp"
+  "/Users/y0_/prog/cc/y0_todo/build/arm_darwin_generic_mach_o_64bit-Debug/y0_todo_autogen/mocs_compilation.cpp"
   "/Users/y0_/prog/cc/y0_todo/main.cpp"
   "/Users/y0_/prog/cc/y0_todo/mainwindow.cpp"
   )
@@ -62,6 +64,8 @@ endif()
 # _directory_contents at /opt/homebrew/lib/cmake/Qt6LinguistTools/Qt6LinguistToolsMacros.cmake:55 (file)
 file(GLOB_RECURSE NEW_GLOB LIST_DIRECTORIES false "/Users/y0_/prog/cc/y0_todo/*.h")
 set(OLD_GLOB
+  "/Users/y0_/prog/cc/y0_todo/build/arm_darwin_generic_mach_o_64bit-Debug/y0_todo_autogen/include/ui_mainwindow.h"
+  "/Users/y0_/prog/cc/y0_todo/build/arm_darwin_generic_mach_o_64bit-Debug/y0_todo_autogen/moc_predefs.h"
   "/Users/y0_/prog/cc/y0_todo/mainwindow.h"
   )
 if(NOT "${NEW_GLOB}" STREQUAL "${OLD_GLOB}")

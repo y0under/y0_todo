@@ -3,6 +3,9 @@
 
 #include <QMainWindow>
 
+#include <QTableView>
+#include <QStandardItemModel>
+
 QT_BEGIN_NAMESPACE
 namespace Ui {
 class MainWindow;
@@ -19,5 +22,9 @@ public:
 
 private:
     Ui::MainWindow *ui;
+
+    QTableView *tableView;
+    QStandardItemModel *model;
+    void setupModel();
 };
 #endif // MAINWINDOW_H
