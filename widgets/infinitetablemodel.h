@@ -6,6 +6,7 @@
 #include <QDate>
 #include <QTime>
 
+namespace widgets {
 class InfiniteTableModel : public QAbstractTableModel
 {
     Q_OBJECT
@@ -21,13 +22,14 @@ public:
 
     QVariant headerData(int section, Qt::Orientation orientation, int role = Qt::DisplayRole) const override;
 
-    void SetRowCount(int count);
+    void setRowCount(int count);
 
-    void SetColumnCount(int count);
+    void setColumnCount(int count);
 
 private:
     int row_count_value = 1000; // 大きな行数
     int column_count_value = 1000; // 大きな列数
 };
+}  // namespace widgets
 
 #endif // INFINITETABLEMODEL_H

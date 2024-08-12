@@ -6,6 +6,8 @@
 #include <QTableView>
 #include <QStandardItemModel>
 
+#include "widgets/infinitetablemodel.h"
+
 QT_BEGIN_NAMESPACE
 namespace Ui {
 class MainWindow;
@@ -24,7 +26,8 @@ private:
     Ui::MainWindow *ui;
 
     QTableView *table_view;
-    QStandardItemModel *model;
+    // QStandardItemModel *model;
+    widgets::InfiniteTableModel *model;
     void SetupModel();
 };
 #endif // MAINWINDOW_H

@@ -1,5 +1,6 @@
 #include "infinitetablemodel.h"
 
+namespace widgets {
 InfiniteTableModel::InfiniteTableModel(QObject *parent) : QAbstractTableModel(parent) {}
 
 int InfiniteTableModel::rowCount(const QModelIndex &parent) const
@@ -42,14 +43,15 @@ QVariant InfiniteTableModel::headerData(int section, Qt::Orientation orientation
     }
 }
 
-void InfiniteTableModel::SetRowCount(int count)
+void InfiniteTableModel::setRowCount(int count)
 {
     row_count_value = count;
     emit layoutChanged();
 }
 
-void InfiniteTableModel::SetColumnCount(int count)
+void InfiniteTableModel::setColumnCount(int count)
 {
     column_count_value = count;
     emit layoutChanged();
 }
+}  // namespace widhets

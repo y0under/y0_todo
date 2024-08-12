@@ -1,17 +1,20 @@
 #include "mainwindow.h"
+#include "widgets/infinitetablemodel.h"
 #include <QVBoxLayout>
 #include <QStandardItem>
 #include <QDate>
 #include <QTime>
 
 MainWindow::MainWindow(QWidget *parent)
-    : QMainWindow(parent), table_view(new QTableView(this)), model(new QStandardItemModel(this))
+    : QMainWindow(parent), table_view(new QTableView(this)), model(new widgets::InfiniteTableModel(this))
 {
     // モデルの設定
     SetupModel();
 
     // QTableView の設定
     table_view->setModel(model);
+    table_view->setHorizontalScrollMode(QAbstractItemView::ScrollPerPixel);
+    table_view->setVerticalScrollMode(QAbstractItemView::ScrollPerPixel);
 
     // QMainWindow のサイズ設定
     resize(800, 600); // 初期サイズの設定
@@ -34,33 +37,24 @@ MainWindow::~MainWindow()
 void MainWindow::SetupModel()
 {
     // 日付と時刻のサンプルデータ
-    QStringList date_headers;
-    QStringList time_headers;
+    QStringList dateHeaders;
+    QStringList timeHeaders;
 
     // 日付の設定（例: 一週間分）
-    QDate start_date = QDate::currentDate();
+    QDate startDate = QDate::currentDate();
     for (int i = 0; i < 7; ++i) {
-        date_headers << start_date.addDays(i).toString("yyyy-MM-dd");
+        dateHeaders << startDate.addDays(i).toString("yyyy-MM-dd");
     }
 
     // 時刻の設定（例: 一日の時間帯）
     QList<QTime> times = {QTime(9, 0), QTime(12, 0), QTime(15, 0), QTime(18, 0)};
     for (const QTime &time : times) {
-        time_headers << time.toString("HH:mm");
+        timeHeaders << time.toString("HH:mm");
     }
 
     // モデルのヘッダー設定
-    model->setHorizontalHeaderLabels(date_headers);
-    model->setVerticalHeaderLabels(time_headers);
+    model->setColumnCount(dateHeaders.size());
+    model->setRowCount(timeHeaders.size());
 
-    // TODOアイテムの設定
-    for (int row = 0; row < time_headers.size(); ++row) {
-        for (int col = 0; col < date_headers.size(); ++col) {
-            QStandardItem *item = new QStandardItem();
-            if (row % 2 == 0 && col % 2 == 0) {  // ダミーの条件
-                item->setText("TODO Item (" + time_headers[row] + " on " + date_headers[col] + ")");
-            }
-            model->setItem(row, col, item);
-        }
-    }
+    // ヘッダーのラベル設定（必要な場合はInfiniteTableModel内で設定されます）
 }
