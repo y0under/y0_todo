@@ -1,0 +1,79 @@
+{
+	"configurations" : 
+	[
+		{
+			"directories" : 
+			[
+				{
+					"build" : ".",
+					"hasInstallRule" : true,
+					"jsonFile" : "directory-.-Debug-03299004f29e3857c6b6.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.16"
+					},
+					"projectIndex" : 0,
+					"source" : ".",
+					"targetIndexes" : 
+					[
+						0,
+						1,
+						2
+					]
+				}
+			],
+			"name" : "Debug",
+			"projects" : 
+			[
+				{
+					"directoryIndexes" : 
+					[
+						0
+					],
+					"name" : "y0_todo",
+					"targetIndexes" : 
+					[
+						0,
+						1,
+						2
+					]
+				}
+			],
+			"targets" : 
+			[
+				{
+					"directoryIndex" : 0,
+					"id" : "y0_todo::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-y0_todo-Debug-3bca97e761ed090918ef.json",
+					"name" : "y0_todo",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "y0_todo_autogen::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-y0_todo_autogen-Debug-88d9aa56c1a1fb7f3437.json",
+					"name" : "y0_todo_autogen",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "y0_todo_autogen_timestamp_deps::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-y0_todo_autogen_timestamp_deps-Debug-6f1ef3f19b0e2913070b.json",
+					"name" : "y0_todo_autogen_timestamp_deps",
+					"projectIndex" : 0
+				}
+			]
+		}
+	],
+	"kind" : "codemodel",
+	"paths" : 
+	{
+		"build" : "/Users/y0_/prog/cc/y0_todo/build/arm_darwin_generic_mach_o_64bit-Debug",
+		"source" : "/Users/y0_/prog/cc/y0_todo"
+	},
+	"version" : 
+	{
+		"major" : 2,
+		"minor" : 7
+	}
+}
