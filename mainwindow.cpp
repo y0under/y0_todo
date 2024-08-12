@@ -5,13 +5,13 @@
 #include <QTime>
 
 MainWindow::MainWindow(QWidget *parent)
-    : QMainWindow(parent), tableView(new QTableView(this)), model(new QStandardItemModel(this))
+    : QMainWindow(parent), table_view(new QTableView(this)), model(new QStandardItemModel(this))
 {
     // モデルの設定
-    setupModel();
+    SetupModel();
 
     // QTableView の設定
-    tableView->setModel(model);
+    table_view->setModel(model);
 
     // QMainWindow のサイズ設定
     resize(800, 600); // 初期サイズの設定
@@ -21,7 +21,7 @@ MainWindow::MainWindow(QWidget *parent)
     // セントラルウィジェットを作成し、レイアウトを設定
     QWidget *centralWidget = new QWidget(this);
     QVBoxLayout *layout = new QVBoxLayout(centralWidget);
-    layout->addWidget(tableView);
+    layout->addWidget(table_view);
 
     centralWidget->setLayout(layout);
     setCentralWidget(centralWidget);
@@ -31,34 +31,34 @@ MainWindow::~MainWindow()
 {
 }
 
-void MainWindow::setupModel()
+void MainWindow::SetupModel()
 {
     // 日付と時刻のサンプルデータ
-    QStringList dateHeaders;
-    QStringList timeHeaders;
+    QStringList date_headers;
+    QStringList time_headers;
 
     // 日付の設定（例: 一週間分）
-    QDate startDate = QDate::currentDate();
+    QDate start_date = QDate::currentDate();
     for (int i = 0; i < 7; ++i) {
-        dateHeaders << startDate.addDays(i).toString("yyyy-MM-dd");
+        date_headers << start_date.addDays(i).toString("yyyy-MM-dd");
     }
 
     // 時刻の設定（例: 一日の時間帯）
     QList<QTime> times = {QTime(9, 0), QTime(12, 0), QTime(15, 0), QTime(18, 0)};
     for (const QTime &time : times) {
-        timeHeaders << time.toString("HH:mm");
+        time_headers << time.toString("HH:mm");
     }
 
     // モデルのヘッダー設定
-    model->setHorizontalHeaderLabels(dateHeaders);
-    model->setVerticalHeaderLabels(timeHeaders);
+    model->setHorizontalHeaderLabels(date_headers);
+    model->setVerticalHeaderLabels(time_headers);
 
     // TODOアイテムの設定
-    for (int row = 0; row < timeHeaders.size(); ++row) {
-        for (int col = 0; col < dateHeaders.size(); ++col) {
+    for (int row = 0; row < time_headers.size(); ++row) {
+        for (int col = 0; col < date_headers.size(); ++col) {
             QStandardItem *item = new QStandardItem();
             if (row % 2 == 0 && col % 2 == 0) {  // ダミーの条件
-                item->setText("TODO Item (" + timeHeaders[row] + " on " + dateHeaders[col] + ")");
+                item->setText("TODO Item (" + time_headers[row] + " on " + date_headers[col] + ")");
             }
             model->setItem(row, col, item);
         }

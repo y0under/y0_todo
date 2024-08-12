@@ -23,8 +23,8 @@ public:
 private:
     Ui::MainWindow *ui;
 
-    QTableView *tableView;
+    QTableView *table_view;
     QStandardItemModel *model;
-    void setupModel();
+    void SetupModel();
 };
 #endif // MAINWINDOW_H
