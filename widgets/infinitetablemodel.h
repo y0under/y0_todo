@@ -12,6 +12,13 @@ class InfiniteTableModel : public QAbstractTableModel
     Q_OBJECT
 
 public:
+
+    enum class Direction {
+        Left = 0,
+        Right,
+        num_of_direction
+    };
+
     InfiniteTableModel(QObject *parent = nullptr);
 
     int rowCount(const QModelIndex &parent = QModelIndex()) const override;
@@ -29,12 +36,18 @@ public:
 
     int getTodayColumnIndex() const;
 
+    void addColumn(Direction direct, int value);
+
 private:
+
+
     int row_count_value = 1000; // 大きな行数
     int column_count_value = 1000; // 大きな列数
     int today_column_index;
     QStringList time_headers;
     QDate today_date;
+
+
 };
 }  // namespace widgets
 

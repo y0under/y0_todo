@@ -77,6 +77,21 @@ void InfiniteTableModel::setTodayColumnIndex(int index)
 
 int InfiniteTableModel::getTodayColumnIndex() const
 {
+
     return today_column_index;
+}
+
+void InfiniteTableModel::addColumn(Direction direction, int value) {
+    if (direction == Direction::Right) {
+        // 右方向にスクロールした場合
+        beginInsertColumns(QModelIndex(), columnCount(), columnCount() + value - 1);
+        column_count_value += value;
+        endInsertColumns();
+    } else if (direction == Direction::Left) {
+        // 左方向にスクロールした場合
+        beginInsertColumns(QModelIndex(), 0, value - 1);
+        column_count_value += value;
+        endInsertColumns();
+    }
 }
 }  // namespace widhets

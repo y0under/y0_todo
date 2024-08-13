@@ -32,5 +32,7 @@ private:
     QPushButton *to_today_btn;
 
     void SetupModel();
+
+    void onHorizontalScroll();
 };
 #endif // MAINWINDOW_H

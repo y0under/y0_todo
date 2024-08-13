@@ -4,6 +4,7 @@
 #include <QStandardItem>
 #include <QDate>
 #include <QTime>
+#include <QScrollBar>
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent), table_view(new QTableView(this)), model(new widgets::InfiniteTableModel(this)),
@@ -53,6 +54,9 @@ MainWindow::MainWindow(QWidget *parent)
     // 初期スクロール位置を設定
     QModelIndex today_index = model->index(0, model->getTodayColumnIndex());
     table_view->scrollTo(today_index, QAbstractItemView::PositionAtCenter);
+
+    // スクロールイベントの接続
+    connect(table_view->horizontalScrollBar(), &QScrollBar::valueChanged, this, &MainWindow::onHorizontalScroll);
 }
 
 MainWindow::~MainWindow()
@@ -88,4 +92,23 @@ void MainWindow::SetupModel()
 
 
     // ヘッダーのラベル設定（必要な場合はInfiniteTableModel内で設定されます）
+}
+
+void MainWindow::onHorizontalScroll() {
+    QScrollBar *scrollBar = table_view->horizontalScrollBar();
+    int scrollBarValue = scrollBar->value();
+    int scrollBarMax = scrollBar->maximum();
+    int scrollBarPageStep = scrollBar->pageStep();
+
+    // スクロールバーが右端に近づいたとき
+    if (scrollBarValue + scrollBarPageStep >= scrollBarMax) {
+        // 右方向に10列追加
+        model->addColumn(widgets::InfiniteTableModel::Direction::Right, 10);
+    }
+
+    // スクロールバーが左端に近づいたとき
+    if (scrollBarValue <= 0) {
+        // 左方向に10列追加
+        model->addColumn(widgets::InfiniteTableModel::Direction::Left, 10);
+    }
 }
