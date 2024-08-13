@@ -89,26 +89,27 @@ void MainWindow::SetupModel()
     model->setColumnCount(date_headers.size());
     model->setTimeHeaders(time_headers);
     model->setTodayColumnIndex(date_headers.indexOf(QDate::currentDate().toString("yyyy-MM-dd")));
-
-
-    // ヘッダーのラベル設定（必要な場合はInfiniteTableModel内で設定されます）
 }
 
 void MainWindow::onHorizontalScroll() {
-    QScrollBar *scrollBar = table_view->horizontalScrollBar();
-    int scrollBarValue = scrollBar->value();
-    int scrollBarMax = scrollBar->maximum();
-    int scrollBarPageStep = scrollBar->pageStep();
+    QScrollBar *scroll_bar = table_view->horizontalScrollBar();
+    int scroll_bar_value = scroll_bar->value();
+    int scroll_bar_max = scroll_bar->maximum();
+    int scroll_bar_min = scroll_bar->minimum();
+    int scroll_bar_page_step = scroll_bar->pageStep();
 
     // スクロールバーが右端に近づいたとき
-    if (scrollBarValue + scrollBarPageStep >= scrollBarMax) {
-        // 右方向に10列追加
-        model->addColumn(widgets::InfiniteTableModel::Direction::Right, 10);
+    if (scroll_bar_value + scroll_bar_page_step >= scroll_bar_max) {
+        model->expandToRight(10); // 右方向に10列追加
     }
 
     // スクロールバーが左端に近づいたとき
-    if (scrollBarValue <= 0) {
+    if (scroll_bar_value <= scroll_bar_min) {
         // 左方向に10列追加
-        model->addColumn(widgets::InfiniteTableModel::Direction::Left, 10);
+        model->expandToLeft(10);
+
+        // 新しく追加された列数分だけスクロールバーの位置を調整
+        int newScrollBarValue = scroll_bar_value + (10 * table_view->columnWidth(table_view->columnAt(0)));
+        scroll_bar->setValue(newScrollBarValue);
     }
 }

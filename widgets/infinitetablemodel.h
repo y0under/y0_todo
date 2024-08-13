@@ -32,21 +32,23 @@ public:
     void setRowCount(int count);
     void setColumnCount(int count);
     void setTimeHeaders(const QStringList &headers);
+
+    void setDateHeaders(const QStringList &headers);
+
     void setTodayColumnIndex(int index);
 
     int getTodayColumnIndex() const;
 
-    void addColumn(Direction direct, int value);
+    void expandToLeft(int additional_columns);
+    void expandToRight(int additional_columns);
 
 private:
-
-
     int row_count_value = 1000; // 大きな行数
     int column_count_value = 1000; // 大きな列数
     int today_column_index;
     QStringList time_headers;
-    QDate today_date;
-
+    QStringList date_headers;
+    QDate today_date;    
 
 };
 }  // namespace widgets
