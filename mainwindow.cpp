@@ -1,4 +1,5 @@
 #include "mainwindow.h"
+#include "dialog/todoitemediter.h"
 #include "widgets/infinitetablemodel.h"
 #include <QVBoxLayout>
 #include <QStandardItem>
@@ -40,6 +41,12 @@ MainWindow::MainWindow(QWidget *parent)
     button_layout->addWidget(add_btn);
     button_layout->addWidget(to_today_btn);
     // button_layout->setAlignment(Qt::AlignLeft);
+
+    // buttun event
+    connect(add_btn, &QPushButton::clicked, this, [this]() {
+        TodoItemEditer edit_dialog(this);  // ダイアログを作成
+        edit_dialog.exec();         // モーダルダイアログとして表示
+    });
 
     // 左側のスペースを追加
     QSpacerItem *spacer = new QSpacerItem(40, 20, QSizePolicy::Expanding, QSizePolicy::Minimum);
