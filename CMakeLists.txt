@@ -28,6 +28,7 @@ if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
         ${PROJECT_SOURCES}
         widgets/infinitetablemodel.h widgets/infinitetablemodel.cpp
         dialog/todoitemediter.h dialog/todoitemediter.cpp dialog/todoitemediter.ui
+        dialog/calendardialog.h dialog/calendardialog.cpp dialog/calendardialog.ui
     )
 # Define target properties for Android with Qt 6 as:
 #    set_property(TARGET y0_todo APPEND PROPERTY QT_ANDROID_PACKAGE_SOURCE_DIR

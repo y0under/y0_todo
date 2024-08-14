@@ -17,6 +17,8 @@ public:
 
 private:
     Ui::TodoItemEditer *ui;
+
+    void showCalendarDialog();
 };
 
 #endif // TODOITEMEDITER_H

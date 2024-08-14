@@ -44,8 +44,12 @@ MainWindow::MainWindow(QWidget *parent)
 
     // buttun event
     connect(add_btn, &QPushButton::clicked, this, [this]() {
-        TodoItemEditer edit_dialog(this);  // ダイアログを作成
-        edit_dialog.exec();         // モーダルダイアログとして表示
+        TodoItemEditer edit_dialog(this);
+
+        if (edit_dialog.exec() != QDialog::Accepted)
+            return;
+
+        // TODO: add data
     });
 
     // 左側のスペースを追加
@@ -68,6 +72,10 @@ MainWindow::MainWindow(QWidget *parent)
 
 MainWindow::~MainWindow()
 {
+    delete table_view;
+    delete model;
+    delete add_btn;
+    delete to_today_btn;
 }
 
 void MainWindow::SetupModel()
