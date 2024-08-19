@@ -1,7 +1,9 @@
 #include "mainwindow.h"
 #include "dialog/todoitemediter.h"
 #include "widgets/infinitetablemodel.h"
+#include <QApplication>
 #include <QVBoxLayout>
+#include <QScreen>
 #include <QStandardItem>
 #include <QDate>
 #include <QTime>
@@ -23,9 +25,23 @@ MainWindow::MainWindow(QWidget *parent)
     // table_view->setFixedHeight(500);
 
     // QMainWindow のサイズ設定
-    resize(800, 600); // 初期サイズの設定
-    setMinimumSize(600, 400); // 最小サイズの設定
-    setMaximumSize(1200, 800); // 最大サイズの設定
+    // resize(800, 600); // 初期サイズの設定
+        // スクリーンリストを取得
+        QList<QScreen *> screens = QApplication::screens();
+    if (!screens.isEmpty()) {
+        // 最初のスクリーン（または適切なスクリーン）を選択
+        QScreen *screen = screens.first();
+        QRect screenGeometry = screen->availableGeometry();
+
+        // macOSおよびiOSでのウィンドウサイズ設定
+        this->setGeometry(screenGeometry);
+
+        // ウィンドウを最大化する
+        this->showMaximized();
+    }
+
+    // setMinimumSize(600, 400); // 最小サイズの設定
+    // setMaximumSize(1200, 800); // 最大サイズの設定
 
     // セントラルウィジェットを作成し、レイアウトを設定
     QWidget *central_widget = new QWidget(this);
